@@ -3,9 +3,9 @@ import { CssBaseline, Grid } from '@material-ui/core';
 
 
 import Header from './component/Header/Header';
-import List from './component/List/list';
-import Map from './component/Map/map';
-import PlaceDetails from './component/PlaceDetails/placedetails';
+import List from './component/List/List';
+import Map from './component/Map/Map';
+// import PlaceDetails from './component/PlaceDetails/placedetails';
 
 const App = () => {
   return (
