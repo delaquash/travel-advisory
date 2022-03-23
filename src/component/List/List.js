@@ -1,7 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { CircularProgress, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@material-ui/core';
+import PlaceDetails from '../PlaceDetails/PlaceDetails';
 
-export default function List () {
+import useStyles from './styles';
+
+ const List =()=> {
+   const classes = useStyles()
+   const [ types, setTypes] = useState('restaurants');
+   const [ ratings, setRatings ] = useState('')
+
+   const places =[
+     {name: 'Cool Places'},
+     {name: 'Best Food'},
+     {name: 'Party Lounge'},
+     {name: 'Large Cinema'},
+     {name: 'Swimming Pool'},
+     {name: 'Event Hall'},
+     {name: 'Great Rooms'},
+     {name: 'Good Roads'},
+     {name: 'Clean Apartment'}
+   ]
   return (
-    <div>This is the List </div>
+    <div className={classes.container}>
+      <Typography variant='h4'> 
+        Restaurant, Hotels & Side Attractions Around You.
+      </Typography>
+      <FormControl className={classes.formControl}>
+        <InputLabel>Type</InputLabel>
+        <Select value={types} onClick={(e) => setTypes(e.target.value)}>
+          <MenuItem value='restaurants'>Restaurants</MenuItem>
+          <MenuItem value='hotels'>Hotels</MenuItem>
+          <MenuItem value='attractions'>Attractions</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel>Rating</InputLabel>
+        <Select value={ratings} onClick={(e) => setRatings(e.target.value)}>
+          <MenuItem value={0}>All Ratings </MenuItem>
+          <MenuItem value={3}>Above 3.0   </MenuItem>
+          <MenuItem value={4}>Above 4.0   </MenuItem>
+          <MenuItem value={4.5}> Above 4.5</MenuItem>
+        </Select>
+      </FormControl>
+      <Grid container spacing={3} className={classes.list}>
+          {places?.map((place, i) =>(
+            <Grid item xs={12} key={i}>
+                <PlaceDetails place={place} />
+            </Grid>
+          ))}
+      </Grid>
+    </div>
   )
 }
+
+
+export default List

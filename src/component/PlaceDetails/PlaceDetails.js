@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function PlaceDetails() {
+export default function PlaceDetails({ place }) {
   return (
-    <div>This is the place details section</div>
+    <div>{place.name}</div>
   )
 }

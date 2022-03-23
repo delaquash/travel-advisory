@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CssBaseline, Grid } from '@material-ui/core';
+
+import { getPlacesData } from './api'
 
 
 import Header from './component/Header/Header';
@@ -8,6 +10,11 @@ import Map from './component/Map/Map';
 // import PlaceDetails from './component/PlaceDetails/placedetails';
 
 const App = () => {
+  
+  useEffect(() => {
+    getPlacesData()
+  }, [])
+  
   return (
     <>
     <CssBaseline />
