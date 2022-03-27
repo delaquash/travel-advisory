@@ -19,6 +19,7 @@ export const getPlacesData = async () => {
     try {
         // we can just destructure to pull out the data itself rather than the whole response
         const {data : { data }} = await axios.get(URL, options)
+        return data
     } catch (error) {
         console.log(error)
     }
