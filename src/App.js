@@ -11,8 +11,17 @@ import Map from './component/Map/Map';
 
 const App = () => {
   const [ places, setPlaces ] = useState('')
-  const [ cordinates, setCordinates ] = useState({})
+  const [ cordinates, setCordinates ] = useState({ lat: 0, lng: 0})
   const [ bounds, setBounds ] = useState(null)
+
+
+  // to get the lng and lat of a location automatically
+useEffect(() => {
+  navigator.geolocation.getCurrentPosition(({ coords: {latitude, longitude}}) => {
+      setCordinates({lat: latitude, lng: longitude})
+  })
+}, []);
+
 
 
   useEffect(() => {
