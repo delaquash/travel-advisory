@@ -10,9 +10,9 @@ import Map from './component/Map/Map';
 // import PlaceDetails from './component/PlaceDetails/placedetails';
 
 const App = () => {
-  const [ places, setPlaces ] = useState('')
-  const [ cordinates, setCordinates ] = useState({ lat: 0, lng: 0})
-  const [ bounds, setBounds ] = useState(null)
+  const [ places, setPlaces ] = useState([])
+  const [ cordinates, setCordinates ] = useState({})
+  const [ bounds, setBounds ] = useState({})
 
 
   // to get the lng and lat of a location automatically
@@ -25,12 +25,11 @@ useEffect(() => {
 
 
   useEffect(() => {
-    console.log(cordinates, bounds)
-    getPlacesData() 
+    getPlacesData(bounds.sw, bounds.ne) 
       .then((data) => {
           setPlaces(data)
       })
-  }, [])
+  }, [cordinates, bounds])
   
   return (
     <>
@@ -38,7 +37,7 @@ useEffect(() => {
     <Header />
     <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
-            <List />
+            <List places={places} />
         </Grid>
         <Grid item xs={12} md={4}>
             <Map

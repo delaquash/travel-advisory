@@ -19,7 +19,7 @@ import useStyles from './styles';
             defaultZoom={14}
             margin={[50, 50, 50, 50]}
             onChange={(e) => {
-              console.log(e)
+              
               setCordinates({lat: e.center.lat, lng:e.center.lng })
               setBounds({ne: e.marginBounds.ne, sw:e.marginBounds.sw})
             }}
