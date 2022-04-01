@@ -23,7 +23,6 @@ useEffect(() => {
 }, []);
 
 
-
   useEffect(() => {
     getPlacesData(bounds.sw, bounds.ne) 
       .then((data) => {
@@ -44,6 +43,7 @@ useEffect(() => {
               setCordinates={setCordinates}
               setBounds={setBounds}
               cordinates={cordinates} 
+              places={places}
             />
         </Grid>
     </Grid>

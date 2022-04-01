@@ -7,6 +7,7 @@ import  Rating  from '@material-ui/lab';
 import useStyles from './styles';
 
  const PlaceDetails =({ place })=> {
+  const classes = useStyles()
   return (
     <Card elevation={6}> 
       <CardMedia 
@@ -30,8 +31,30 @@ import useStyles from './styles';
               <Typography variant='subtitle2' color='textSecondary'>{award.display_name}</Typography>
           </Box>
         ))}
+        {place?.cuisine?.map(({ name }) => (
+          <Chip key={name} label={name} size="small"/>
+        ))}
+
+        {place?.address && (
+          <Typography gutterBottom variant="subtitle2" color="textSecondary" className={classes.subtitle}>
+              <LocationOnIcon /> {place.address}
+          </Typography>
+        )}
+        {place?.phone && (
+          <Typography variant="subtitle2" color="textSecondary" className={classes.spacing}>
+            <PhoneIcon /> {place.phone}
+          </Typography>
+        )}
+         <CardActions>
+            <Button size='small' color='primary' onClick={() => window.open(place.web_url, '_blank')}>
+                Trip Advisor
+            </Button>
+            <Button size='small' color='primary' onClick={() => window.open(place.website, '_blank')}>
+                Website
+            </Button>
+          </CardActions>
       </CardContent>
     </Card>
   )
 }
-export default PlaceDetails
+export default PlaceDetails;
