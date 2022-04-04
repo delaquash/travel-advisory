@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import { CssBaseline, Grid } from '@material-ui/core';
 
-import { getPlacesData } from './api/index'
+import { getPlacesData, getWeatherData } from './api/index'
 
 
 import Header from './component/Header/Header';
@@ -12,6 +12,7 @@ import Map from './component/Map/Map';
 const App = () => {
   const [ places, setPlaces ] = useState([])
   const [ cordinates, setCordinates ] = useState({})
+  const [weatherData, setWeatherData] = useState([])
   const [filteredPlaces, setFilteredPlaces] = useState([])
   const [ bounds, setBounds ] = useState({})
   const [childClicked, setChildClicked] = useState(null)
@@ -36,6 +37,8 @@ useEffect(() => {
   useEffect(() => {
     if(bounds.sw && bounds.ne) {
       setIsLoading(true)
+      getWeatherData(cordinates.lat, cordinates.lng)
+        .then((data) => setWeatherData(data))
     getPlacesData(types, bounds.sw, bounds.ne) 
       .then((data) => {
           setPlaces(data?.filter((place) => place.name && place.num_reviews > 0))
@@ -69,6 +72,7 @@ useEffect(() => {
               cordinates={cordinates} 
               places={filteredPlaces.length ? filteredPlaces : places}
               setChildClicked={setChildClicked}
+              weatherData={weatherData}
             />
         </Grid>
     </Grid>
