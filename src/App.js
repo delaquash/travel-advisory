@@ -15,6 +15,8 @@ const App = () => {
   const [ bounds, setBounds ] = useState({})
   const [childClicked, setChildClicked] = useState(null)
   const [isLoading, setIsLoading] = useState(false);
+  const [ types, setTypes] = useState('restaurants');
+   const [ ratings, setRatings ] = useState('')
 
   // to get the lng and lat of a location automatically
 useEffect(() => {
@@ -26,12 +28,12 @@ useEffect(() => {
 
   useEffect(() => {
     setIsLoading(true)
-    getPlacesData(bounds.sw, bounds.ne) 
+    getPlacesData(types, bounds.sw, bounds.ne) 
       .then((data) => {
           setPlaces(data)
           setIsLoading(false)
       })
-  }, [cordinates, bounds])
+  }, [types, cordinates, bounds])
   
   return (
     <>
@@ -42,6 +44,11 @@ useEffect(() => {
             <List 
               places={places} 
               childClicked={childClicked}
+              isLoading={isLoading}
+              types={types}
+              setTypes={setTypes}
+              ratings={ratings}
+              setRatings={setRatings}
             />
         </Grid>
         <Grid item xs={12} md={8}>
