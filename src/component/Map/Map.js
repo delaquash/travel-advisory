@@ -25,7 +25,7 @@ import useStyles from './styles';
               setCordinates({lat: e.center.lat, lng:e.center.lng })
               setBounds({ne: e.marginBounds.ne, sw:e.marginBounds.sw})
             }}
-            options={''}
+            options={{ disableDefaultUI:true, zoomControl:true, styles:mapStyles }}
             onChildClick={(child) => setChildClicked(child)}
             
         >
